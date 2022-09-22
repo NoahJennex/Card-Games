@@ -1,0 +1,75 @@
+#deck{
+    // border: 1px solid black;
+    position: relative;
+    width: 100px;
+    height: 145px;
+    // transform: rotate(-90deg);
+}
+#deck:hover{
+    transform: scale(1.01);
+}
+
+#pile{
+    // border: 1px solid red;
+    position: relative;
+    width: 100px;
+    height: 145px;
+}
+#pile:hover{
+    transform: scale(1.01);
+}
+
+#hand1, #hand2{
+    border: 1px solid black;
+    width: fit-content;
+}
+
+#tableCenter{
+    position: relative;
+    // top: 50px;
+    left: 400px;
+    border: 1px solid green;
+
+    width: 230px;
+    // width: fit-content;
+    height: 145px;
+    display: grid;
+
+    background-color: black;
+
+}
+
+.cardImg{
+    width: 100px;
+}
+// .cardHand{
+
+// }
+.cardHand:hover{
+    transform: scale(1.01);
+    bottom: 10px;
+}
+
+.disable-select {
+    user-select: none; /* supported by Chrome and Opera */
+   -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+   -moz-user-select: none; /* Firefox */
+   -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+.grid-container{
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.grid-item1{
+    grid-column-start: 1;
+    grid-column-end: 1;
+    margin: auto;
+}
+.grid-item2{
+    grid-column-start: 2;
+    grid-column-end: 2;
+    margin: auto;
+}

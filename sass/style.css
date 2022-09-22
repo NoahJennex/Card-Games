@@ -1,0 +1,84 @@
+#deck {
+  position: relative;
+  width: 100px;
+  height: 145px;
+}
+
+#deck:hover {
+  -webkit-transform: scale(1.01);
+          transform: scale(1.01);
+}
+
+#pile {
+  position: relative;
+  width: 100px;
+  height: 145px;
+}
+
+#pile:hover {
+  -webkit-transform: scale(1.01);
+          transform: scale(1.01);
+}
+
+#hand1, #hand2 {
+  border: 1px solid black;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+#tableCenter {
+  position: relative;
+  left: 400px;
+  border: 1px solid green;
+  width: 230px;
+  height: 145px;
+  display: -ms-grid;
+  display: grid;
+  background-color: black;
+}
+
+.cardImg {
+  width: 100px;
+}
+
+.cardHand:hover {
+  -webkit-transform: scale(1.01);
+          transform: scale(1.01);
+  bottom: 10px;
+}
+
+.disable-select {
+  user-select: none;
+  /* supported by Chrome and Opera */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+}
+
+.grid-container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto auto;
+      grid-template-columns: auto auto;
+}
+
+.grid-item1 {
+  -ms-grid-column: 1;
+      grid-column-start: 1;
+  grid-column-end: 1;
+  margin: auto;
+}
+
+.grid-item2 {
+  -ms-grid-column: 2;
+      grid-column-start: 2;
+  grid-column-end: 2;
+  margin: auto;
+}
+/*# sourceMappingURL=style.css.map */
