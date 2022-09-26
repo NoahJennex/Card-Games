@@ -29,6 +29,7 @@ class Card{
 class Deck{
     constructor(){
         this.deckArraylist = [];
+        this.cardElementArraylist = [];
     }
     setStandardDeck(){
         this.deckArraylist = [];
@@ -38,7 +39,6 @@ class Deck{
 
                 let value = i;
                 let suit = j;
-
 
                 let newDeckCard = new Card(suit,value, "CardPNG\\red.svg");
                 this.deckArraylist.push(newDeckCard);
@@ -55,23 +55,90 @@ class Deck{
         this.deckArraylist = tempArraylist;
 
     }
+    fillDeck(sizeIn, deckIn){
+        for(var i=0;i<sizeIn;i++){
+            this.deckArraylist.push(deckIn.deckArraylist.pop());
+        }
+    }
+    updateDeckFaceUp(deckDivIn){
+        deckDivIn.innerHTML = "";
+        for(var i=0;i<this.deckArraylist.length;i++){
+            let element = this.deckArraylist[i];
+            let deckCount = i;
+            let cardPic = document.createElement("img");
+            cardPic.className="cardImg";
+            cardPic.draggable=false;
+            cardPic.src=element.pictureFront;
+            cardPic.style.position = "absolute";
+            cardPic.style.left = deckCount/4+"px";
+            cardPic.style.top = "-"+deckCount/8+"px";
+            deckDivIn.appendChild(cardPic);
+            deckCount++;
+        }
+    }
+    updateDeckFaceDown(deckDivIn){
+        deckDivIn.innerHTML = "";
+        for(var i=0;i<this.deckArraylist.length;i++){
+            let element = this.deckArraylist[i];
+            let deckCount = i;
+            let cardPic = document.createElement("img");
+            cardPic.className="cardImg";
+            cardPic.draggable=false;
+            cardPic.src=element.pictureBack;
+            cardPic.style.position = "absolute";
+            cardPic.style.left = deckCount/4+"px";
+            cardPic.style.top = "-"+deckCount/8+"px";
+            deckDivIn.appendChild(cardPic);
+            deckCount++;
+        }
+    }
 }
 
 class Pile extends Deck{
     constructor(){
         super();
-        this.pileArraylist = [];
     }
 }
 
-class Hand {
+class Hand extends Deck{
     constructor(startingSize){
+        super();
         this.startingSize = startingSize;
-        this.handArraylist = [];
     }
-    fillHand(sizeIn, deckIn){
-        for(var i=0;i<sizeIn;i++){
-            this.handArraylist.push(deckIn.deckArraylist.pop());
+//Overrides
+    updateDeckFaceUp(deckDivIn){
+        deckDivIn.innerHTML = "";
+        for(var i=0;i<this.deckArraylist.length;i++){
+            let element = this.deckArraylist[i];
+            let deckCount = i;
+            let cardPic = document.createElement("img");
+            cardPic.className="cardImg cardHand";
+            cardPic.draggable=false;
+            cardPic.src=element.pictureFront;
+            cardPic.style.position = "relative";
+            // cardPic.style.right = 40*deckCount+"px";
+            // cardPic.style.top = "-"+deckCount/8+"px";
+            cardPic.style.marginRight = "-40px";
+            deckDivIn.appendChild(cardPic);
+            deckCount++;
+        }
+    }
+//Overrides
+    updateDeckFaceDown(deckDivIn){
+        deckDivIn.innerHTML = "";
+        for(var i=0;i<this.deckArraylist.length;i++){
+            let element = this.deckArraylist[i];
+            let deckCount = i;
+            let cardPic = document.createElement("img");
+            cardPic.className="cardImg cardHand";
+            cardPic.draggable=false;
+            cardPic.src=element.pictureBack;
+            cardPic.style.position = "relative";
+            // cardPic.style.right = 40*deckCount+"px"; //MAYBE USE NEGATIVE MARGIN
+            // cardPic.style.top = "-"+deckCount/8+"px";
+            cardPic.style.marginRight = "-40px";
+            deckDivIn.appendChild(cardPic);
+            deckCount++;
         }
     }
 }
@@ -84,4 +151,4 @@ class Player{
     }
 }
 
-export{Card, Deck, Hand};
+export{Card, Deck, Pile, Hand};
