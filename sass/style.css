@@ -1,10 +1,10 @@
-#deck {
+.deck {
   position: relative;
   width: 100px;
   height: 145px;
 }
 
-#deck:hover {
+.deck:hover {
   -webkit-transform: scale(1.01);
           transform: scale(1.01);
 }
@@ -22,9 +22,7 @@
 
 #hand1, #hand2 {
   border: 1px solid black;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
+  width: 100%;
 }
 
 #tableCenter {
@@ -39,12 +37,19 @@
 
 .cardImg {
   width: 100px;
+  -webkit-transition: all 0.4s linear;
+  transition: all 0.4s linear;
 }
 
-.cardHand:hover {
-  -webkit-transform: scale(1.01);
-          transform: scale(1.01);
-  bottom: 10px;
+.cardHand {
+  position: relative;
+  margin-right: -40px;
+  clear: top;
+  clear: left;
+}
+
+.cardInDeck {
+  position: absolute;
 }
 
 .disable-select {

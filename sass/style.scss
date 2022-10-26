@@ -1,11 +1,12 @@
-#deck{
+.deck{
     // border: 1px solid black;
     position: relative;
     width: 100px;
+    // width: fit-content;
     height: 145px;
     // transform: rotate(-90deg);
 }
-#deck:hover{
+.deck:hover{
     transform: scale(1.01);
 }
 
@@ -21,7 +22,7 @@
 
 #hand1, #hand2{
     border: 1px solid black;
-    width: fit-content;
+    width: 100%;
 }
 
 #tableCenter{
@@ -41,14 +42,31 @@
 
 .cardImg{
     width: 100px;
+    transition: all 0.4s linear;
 }
-// .cardHand{
-
+.cardHand{
+    position: relative;
+    margin-right: -40px;
+    clear: top;
+    clear: left;
+}
+// .cardHand:hover{
+//     transform: scale(1.01);
+//     bottom: 10px;
 // }
-.cardHand:hover{
-    transform: scale(1.01);
-    bottom: 10px;
+
+.cardInDeck{
+    position: absolute;
+    // left:10px;
+    // top:10px;
+    // margin-right: -1px;
 }
+
+// .cardInDeck:nth-child(n){
+//     // position: absolute;
+//     left: (n*10)px;
+//     // margin-right: -1px;
+// }
 
 .disable-select {
     user-select: none; /* supported by Chrome and Opera */
