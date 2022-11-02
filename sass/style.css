@@ -46,8 +46,6 @@
 
 .cardImg {
   width: 100px;
-  -webkit-transition: all 0.4s linear;
-  transition: all 0.4s linear;
 }
 
 .cardHand {

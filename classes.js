@@ -33,7 +33,7 @@ class Card{
     //returns a card element (img) for the card
     createCardElement(){
         let newCardElement = document.createElement("img");
-        // newCardElement.id = this.pictureFront;
+        newCardElement.id = this.pictureFront;
         newCardElement.className="cardImg";
         newCardElement.draggable=false;
         newCardElement.src=this.pictureFront;
@@ -54,7 +54,6 @@ class Deck{
     //creates an arraylist of 52 cards (standard deck)
     setStandardDeck(){
         this.deckArraylist = [];
-
         for(let i=1;i<14;i++){
             for(let j=0;j<4;j++){
 
@@ -79,9 +78,11 @@ class Deck{
     }
     //fills a deck with a set amount of cards from another deck
     //takes cards from the end of the arraylist
-    fillDeck(sizeIn, deckIn){
+    async fillDeck(sizeIn, deckIn, animationTime){
+        [...document.getElementsByClassName("cardImg")].forEach(element => {element.style.transition = "all "+(animationTime/1000)+"s linear"});
+ 
         for(var i=0;i<sizeIn;i++){
-            this.deckArraylist.push(deckIn.deckArraylist.pop());
+            await moveTopOfDeck(deckIn, this, false, false, animationTime);
         }
     }
     //sets all the card elements into the deck div

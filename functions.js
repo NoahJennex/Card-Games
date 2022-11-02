@@ -11,8 +11,16 @@ function getCoords(element) {
     };
 }
 
+async function wait(ms){
+    return new Promise(resolve => {
+        setTimeout(resolve, ms);
+    });
+}
+
 //gets top card of a deck and moves it to another deck
-function moveTopOfDeck(deckFrom, deckTo, showCardFrom, showCardTo){
+async function moveTopOfDeck(deckFrom, deckTo, showCardFrom, showCardTo, animationTime){
+    [...document.getElementsByClassName("cardImg")].forEach(element => {element.style.transition = "all "+(animationTime/1000)+"s linear"});
+
     if(deckTo.div.firstChild){var toCoords = getCoords(deckTo.div.lastChild);}//checks if div has children, sets toCoords to location of the last child
     else{var toCoords = getCoords(deckTo.div);}//sets toCoords to the deck div
     let fromCoords = getCoords(deckFrom.div);
@@ -21,18 +29,20 @@ function moveTopOfDeck(deckFrom, deckTo, showCardFrom, showCardTo){
     topCard.cardElement.style.left = (toCoords.left - fromCoords.left) + "px";
     topCard.cardElement.style.top = (toCoords.top - fromCoords.top) + "px";
 
-    //need to add timer so element moves before before getting sent to new div
-    setTimeout(function(){
+    await wait(animationTime).then(() =>{
+        //need to add timer so element moves before before getting sent to new div
         deckTo.div.appendChild(deckFrom.deckArraylist[deckFrom.deckArraylist.length-1].cardElement);
         deckTo.deckArraylist.push(deckFrom.deckArraylist.pop());
         deckFrom.updateDeck(showCardFrom);
         deckTo.updateDeck(showCardTo);
-    },400);
+    });
 }
 
 //takes selected cards of a deck and moves them to another deck
-function moveSelectedCards(deckFrom, deckTo, showCardFrom, showCardTo){
-    deckFrom.selectedArray.forEach(element=> {
+async function moveSelectedCards(deckFrom, deckTo, showCardFrom, showCardTo, animationTime){
+    [...document.getElementsByClassName("cardImg")].forEach(element => {element.style.transition = "all "+(animationTime/1000)+"s linear"});
+
+    deckFrom.selectedArray.forEach(async element=> {
         if(deckTo.div.firstChild){var toCoords = getCoords(deckTo.div.lastChild);}//checks if div has children, sets toCoords to location of the last child
         else{var toCoords = getCoords(deckTo.div);}//sets toCoords to the deck div
         let fromCoords = getCoords(element.cardElement);
@@ -40,7 +50,7 @@ function moveSelectedCards(deckFrom, deckTo, showCardFrom, showCardTo){
         element.cardElement.style.left = toCoords.left + "px";
         element.cardElement.style.top = (toCoords.top - fromCoords.top) + "px";
 
-        setTimeout(function(){
+        await wait(animationTime).then(() =>{
             deckTo.div.appendChild(element.cardElement);
             //pushes element to new arraylist
             deckTo.deckArraylist.push(element);
@@ -48,7 +58,7 @@ function moveSelectedCards(deckFrom, deckTo, showCardFrom, showCardTo){
             deckFrom.deckArraylist.splice(deckFrom.deckArraylist.indexOf(element), 1); 
             deckTo.updateDeck(showCardTo);
             deckFrom.updateDeck(showCardFrom);
-        },400);   
+        });   
         deckFrom.selectedArray = [];//resets/empties the selectedArray
     });
 }
@@ -91,4 +101,4 @@ function mouseOutCard(element){
     element.cardElement.style.top = "0px";
 }
 
-export{getCoords, moveTopOfDeck, moveSelectedCards, onCardClick, mouseOutCard, mouseOverCard};
+export{getCoords, wait, moveTopOfDeck, moveSelectedCards, onCardClick, mouseOutCard, mouseOverCard};
