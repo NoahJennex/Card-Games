@@ -1,5 +1,6 @@
-import {moveCardElement, getCoords, moveTopOfDeck} from '/functions.js'
+import {getCoords, moveTopOfDeck, onCardClick, mouseOutCard, mouseOverCard} from '/functions.js'
 
+// --CARD--
 
 class Card{
     constructor(suit, value, pictureBack){
@@ -10,6 +11,7 @@ class Card{
 
         this.cardElement = this.createCardElement();
     }
+    //returns a string version of .svg file for the card based off the suit and value
     getPictureFrontString(suitIn, valueIn){
         let valueString = "";
         let suitString = "";
@@ -25,19 +27,21 @@ class Card{
         else if(suitIn == 2){suitString = "hearts";}
         else if(suitIn == 3){suitString = "spades";}
 
-
         return "CardPNG\\"+ suitString +"_"+ valueString +".svg";
 
     }
+    //returns a card element (img) for the card
     createCardElement(){
         let newCardElement = document.createElement("img");
-        newCardElement.id = this.pictureFront;
+        // newCardElement.id = this.pictureFront;
         newCardElement.className="cardImg";
         newCardElement.draggable=false;
         newCardElement.src=this.pictureFront;
         return newCardElement;
     }
 }
+
+// --DECK--
 
 class Deck{
     constructor(deckName){
@@ -47,6 +51,7 @@ class Deck{
         this.div.id = this.deckName
         this.div.className = "deck";
     }
+    //creates an arraylist of 52 cards (standard deck)
     setStandardDeck(){
         this.deckArraylist = [];
 
@@ -61,6 +66,7 @@ class Deck{
             }
         } 
     }
+    //randomizes (shuffles) the deck
     shuffleDeck(){
         let tempArraylist = [];
         while(this.deckArraylist.length != 0){
@@ -71,38 +77,46 @@ class Deck{
         this.deckArraylist = tempArraylist;
 
     }
+    //fills a deck with a set amount of cards from another deck
+    //takes cards from the end of the arraylist
     fillDeck(sizeIn, deckIn){
         for(var i=0;i<sizeIn;i++){
             this.deckArraylist.push(deckIn.deckArraylist.pop());
         }
     }
+    //sets all the card elements into the deck div
+    //should be used once when the deck is created
+    //showCard is boolean -> true: card faced up, false: card faced down
     setDeck(showCard){
         this.deckArraylist.forEach(element => {
-
-            if(showCard == true){element.cardElement.src = element.pictureFront;}
-            else{element.cardElement.src = element.pictureBack;}
-
-            // element.cardElement.src=element.pictureFront;
-            element.cardElement.className = "cardImg cardInDeck";
-            this.div.appendChild(element.cardElement)
-            
+            this.div.appendChild(element.cardElement);  
         });
         this.updateDeck(showCard);
     }
+    //updates the card elements in the deck div
+    //should be used when the deck is set and needs to be updated
+    //showCard is boolean -> true: card faced up, false: card faced down
     updateDeck(showCard){
-        let count = 0;
+        let count = 0;//count is used for the offset of the card elements in the deck
         this.deckArraylist.forEach(element =>{
+            //updates if deck is face up or face down
             if(showCard == true){element.cardElement.src = element.pictureFront;}
             else{element.cardElement.src = element.pictureBack;}
 
-            // element.cardElement.style.top = "0px";
             element.cardElement.className = "cardImg cardInDeck";
+            //offsets each card element to look like its in a deck
             element.cardElement.style.left = count*0.25 + "px";
             element.cardElement.style.top = -count*0.15 + "px";
+            element.cardElement.onclick = function(){}//disables any onclick eventlistener
+            element.cardElement.style.border = "none";//removes any border styles
+
             count++;
         })
     }
 }
+
+// --PILE-- extends deck
+// is the exact same as a deck for now might have changes in the future
 
 class Pile extends Deck{
     constructor(pileName){
@@ -110,47 +124,44 @@ class Pile extends Deck{
     }
 }
 
+// --HAND-- extends deck
+// is the players hand. is visually different than a deck
+// has a selected arraylist that holds cards that have been selected. 
+//starting size determines the amount of cards the hand starts with
 class Hand extends Deck{
     constructor(startingSize, handName){
         super(handName);
         this.startingSize = startingSize;
         this.selectedArray = [];
     }
-//Overrides
+    //Overrides
     setDeck(showCard){
+        this.div.classList.add("hand");
         this.deckArraylist.forEach(element => {
-            
-            if(showCard == true){element.cardElement.src = element.pictureFront;}
-            else{element.src = element.cardElement.pictureBack;}
-
-            element.cardElement.className = "cardImg cardHand";
-            this.div.appendChild(element.cardElement)
-            
+            this.div.appendChild(element.cardElement) 
         });
         this.updateDeck(showCard);
     }
+    //Overrides
     updateDeck(showCard){
+        let count = 0;//count is used for the offset of the card elements in the hand
         this.deckArraylist.forEach(element =>{
+            //updates if hand is face up or face down
             if(showCard == true){element.cardElement.src = element.pictureFront;}
-            else{element.src = element.cardElement.pictureBack;}
+            else{element.cardElement.src = element.pictureBack;}
 
-            element.cardElement.style.top = "0px";
-            element.cardElement.className = "cardImg cardHand";
+            element.cardElement.style.top = null;//resets the card offset
+            element.cardElement.style.left = null;//resets the card offset
+            element.cardElement.style.left = count*(50) + "px";//offsets the card 50 pixels to the left
+            element.cardElement.className = "cardImg cardHand cardHoverTrue";
 
-            element.cardElement.onmouseover = function(){
-                element.cardElement.style.transform = "scale(1.01)";
-                element.cardElement.style.top = "-10px";
-            }
-            element.cardElement.onmouseout = function(){
-                element.cardElement.style.transform = "scale(1)";
-                element.cardElement.style.top = "0px";
-            }
-            // element.cardElement.onclick() = function(){
-
-            // }
+            onCardClick(this);//adds onclick event listener to each card in the hand
+            count++;
         })
     }
 }
+
+// --PLAYER--
 
 class Player{
     constructor(name, hand){

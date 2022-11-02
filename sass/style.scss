@@ -6,7 +6,12 @@
     height: 145px;
     // transform: rotate(-90deg);
 }
-.deck:hover{
+// .hand{
+//     overflow-x: auto;
+//     overflow-y: visible;
+//     height: 110px;
+// }
+#deck:hover, #pile:hover{
     transform: scale(1.01);
 }
 
@@ -40,20 +45,31 @@
 
 }
 
+#moveHandBtn{
+    margin: 5px;
+}
+#moveHandBtn:hover{
+    transform: scale(1.05);
+}
+
 .cardImg{
     width: 100px;
     transition: all 0.4s linear;
 }
 .cardHand{
-    position: relative;
-    margin-right: -40px;
-    clear: top;
-    clear: left;
+    position: absolute;
+    // margin-right: -40px;
+    border: solid 1px transparent;
 }
-// .cardHand:hover{
-//     transform: scale(1.01);
-//     bottom: 10px;
-// }
+
+.cardHoverTrue:hover{
+    transform: scale(1.01);
+    bottom: 10px;
+}
+.cardHoverFalse:hover{
+    transform: scale(1);
+    bottom: 0px;
+}
 
 .cardInDeck{
     position: absolute;
@@ -61,12 +77,6 @@
     // top:10px;
     // margin-right: -1px;
 }
-
-// .cardInDeck:nth-child(n){
-//     // position: absolute;
-//     left: (n*10)px;
-//     // margin-right: -1px;
-// }
 
 .disable-select {
     user-select: none; /* supported by Chrome and Opera */

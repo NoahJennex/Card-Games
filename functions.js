@@ -1,11 +1,7 @@
-function moveCardElement(cardIn, deckIn){
-    deckIn.appendChild(cardIn);
-}
 
-
-// get document coordinates of the element
-function getCoords(elem) {
-    let box = elem.getBoundingClientRect();
+// gets coordinates of an element
+function getCoords(element) {
+    let box = element.getBoundingClientRect();
   
     return {
       top: box.top + window.pageYOffset,
@@ -15,27 +11,84 @@ function getCoords(elem) {
     };
 }
 
+//gets top card of a deck and moves it to another deck
 function moveTopOfDeck(deckFrom, deckTo, showCardFrom, showCardTo){
-
-    let toCoords = getCoords(deckTo.div);
+    if(deckTo.div.firstChild){var toCoords = getCoords(deckTo.div.lastChild);}//checks if div has children, sets toCoords to location of the last child
+    else{var toCoords = getCoords(deckTo.div);}//sets toCoords to the deck div
     let fromCoords = getCoords(deckFrom.div);
     let topCard = deckFrom.deckArraylist[deckFrom.deckArraylist.length-1];
 
     topCard.cardElement.style.left = (toCoords.left - fromCoords.left) + "px";
     topCard.cardElement.style.top = (toCoords.top - fromCoords.top) + "px";
-    //need to add timer so element moves before before getting sent to new div (need to find way to get coords of divs)
 
+    //need to add timer so element moves before before getting sent to new div
     setTimeout(function(){
-        // let topCard = deckFrom.deckArraylist[deckFrom.deckArraylist.length-1];
-        if(showCardTo == true){topCard.cardElement.src = topCard.pictureFront;}
-        else{topCard.cardElement.src = topCard.pictureBack;}
-        moveCardElement(deckFrom.deckArraylist[deckFrom.deckArraylist.length-1].cardElement, deckTo.div);
+        deckTo.div.appendChild(deckFrom.deckArraylist[deckFrom.deckArraylist.length-1].cardElement);
         deckTo.deckArraylist.push(deckFrom.deckArraylist.pop());
-
-        // deckFrom.updateDeckFaceUp();
-        // deckFrom.updateDeck(showCardFrom);
+        deckFrom.updateDeck(showCardFrom);
         deckTo.updateDeck(showCardTo);
-    },400)
+    },400);
 }
 
-export{moveCardElement, getCoords, moveTopOfDeck};
+//takes selected cards of a deck and moves them to another deck
+function moveSelectedCards(deckFrom, deckTo, showCardFrom, showCardTo){
+    deckFrom.selectedArray.forEach(element=> {
+        if(deckTo.div.firstChild){var toCoords = getCoords(deckTo.div.lastChild);}//checks if div has children, sets toCoords to location of the last child
+        else{var toCoords = getCoords(deckTo.div);}//sets toCoords to the deck div
+        let fromCoords = getCoords(element.cardElement);
+
+        element.cardElement.style.left = toCoords.left + "px";
+        element.cardElement.style.top = (toCoords.top - fromCoords.top) + "px";
+
+        setTimeout(function(){
+            deckTo.div.appendChild(element.cardElement);
+            //pushes element to new arraylist
+            deckTo.deckArraylist.push(element);
+            //removes item at the index of that element (finds element and removes from the arraylist)
+            deckFrom.deckArraylist.splice(deckFrom.deckArraylist.indexOf(element), 1); 
+            deckTo.updateDeck(showCardTo);
+            deckFrom.updateDeck(showCardFrom);
+        },400);   
+        deckFrom.selectedArray = [];//resets/empties the selectedArray
+    });
+}
+
+//adds onclick eventlistener to all cards in a deck/hand
+//raises and highlights clicked card, then adds to the selectedArray
+function onCardClick(hand){
+    hand.deckArraylist.forEach(card => {
+        card.cardElement.onclick = function(){
+            //if the card has already been added to teh selectedArray it removes it and resets the card into the default position
+            if(hand.selectedArray.includes(card)){
+                hand.selectedArray.splice(hand.selectedArray.indexOf(card), 1); 
+
+                card.cardElement.classList.add("cardHoverTrue");
+                card.cardElement.style.top = null;
+                card.cardElement.style.border = "solid 1px transparent";
+            }
+            //adds card to the selectedArray removes the hover class
+            else{
+                hand.selectedArray.push(card);
+
+                card.cardElement.classList.remove("cardHoverTrue");
+                card.cardElement.style.top = "-10px";
+                card.cardElement.style.border = "solid 1px limegreen";
+            }
+        }
+    });
+}
+
+// both mouseOverCard and mouseOutCard were used when hovering over a card in a hand
+// instead :hover is being used in css so these functions have no use at the moment
+//keeping incase they are used later down the road
+function mouseOverCard(element){
+    console.log('mouseOver')
+    element.cardElement.style.transform = "scale(1.01)";
+    element.cardElement.style.top = "-10px";
+}
+function mouseOutCard(element){
+    element.cardElement.style.transform = "scale(1)";
+    element.cardElement.style.top = "0px";
+}
+
+export{getCoords, moveTopOfDeck, moveSelectedCards, onCardClick, mouseOutCard, mouseOverCard};

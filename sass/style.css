@@ -4,7 +4,7 @@
   height: 145px;
 }
 
-.deck:hover {
+#deck:hover, #pile:hover {
   -webkit-transform: scale(1.01);
           transform: scale(1.01);
 }
@@ -35,6 +35,15 @@
   background-color: black;
 }
 
+#moveHandBtn {
+  margin: 5px;
+}
+
+#moveHandBtn:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
 .cardImg {
   width: 100px;
   -webkit-transition: all 0.4s linear;
@@ -42,10 +51,20 @@
 }
 
 .cardHand {
-  position: relative;
-  margin-right: -40px;
-  clear: top;
-  clear: left;
+  position: absolute;
+  border: solid 1px transparent;
+}
+
+.cardHoverTrue:hover {
+  -webkit-transform: scale(1.01);
+          transform: scale(1.01);
+  bottom: 10px;
+}
+
+.cardHoverFalse:hover {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  bottom: 0px;
 }
 
 .cardInDeck {
