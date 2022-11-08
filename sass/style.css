@@ -20,9 +20,8 @@
           transform: scale(1.01);
 }
 
-#hand1, #hand2 {
+#hand1, #hand2, #hand3, #hand4 {
   border: 1px solid black;
-  width: 100%;
 }
 
 #tableCenter {
@@ -53,9 +52,16 @@
   border: solid 1px transparent;
 }
 
+.deckHand {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  z-index: 4;
+}
+
 .cardHoverTrue:hover {
-  -webkit-transform: scale(1.01);
-          transform: scale(1.01);
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
   bottom: 10px;
 }
 

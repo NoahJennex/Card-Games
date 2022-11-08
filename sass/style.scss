@@ -25,9 +25,9 @@
     transform: scale(1.01);
 }
 
-#hand1, #hand2{
+#hand1, #hand2, #hand3, #hand4{
     border: 1px solid black;
-    width: 100%;
+    // width: 100%;
 }
 
 #tableCenter{
@@ -61,9 +61,13 @@
     // margin-right: -40px;
     border: solid 1px transparent;
 }
+.deckHand{
+    width: fit-content;
+    z-index: 4;
+}
 
 .cardHoverTrue:hover{
-    transform: scale(1.01);
+    transform: scale(1.1);
     bottom: 10px;
 }
 .cardHoverFalse:hover{
@@ -73,9 +77,6 @@
 
 .cardInDeck{
     position: absolute;
-    // left:10px;
-    // top:10px;
-    // margin-right: -1px;
 }
 
 .disable-select {

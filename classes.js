@@ -134,6 +134,7 @@ class Hand extends Deck{
         super(handName);
         this.startingSize = startingSize;
         this.selectedArray = [];
+        this.div.classList.add("deckHand");
     }
     //Overrides
     setDeck(showCard){
@@ -146,6 +147,7 @@ class Hand extends Deck{
     //Overrides
     updateDeck(showCard){
         let count = 0;//count is used for the offset of the card elements in the hand
+        this.div.style.width = 50*this.deckArraylist.length + "px";
         this.deckArraylist.forEach(element =>{
             //updates if hand is face up or face down
             if(showCard == true){element.cardElement.src = element.pictureFront;}
