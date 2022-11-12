@@ -17,9 +17,11 @@ playerArray.push(hand4);
 
 var defaultAnimationTime = 300;
 var rotateDegree = 0;
+var centerRotateDegree = 0;
 var playerTurn = 0;
 
 var table = document.getElementById("tableInner");
+var centerGrid = document.getElementById("grid-item-center");
 var centerDiv = document.getElementById("center");
 var handDiv1 = document.getElementById("handDiv1");
 var handDiv2 = document.getElementById("handDiv2");
@@ -69,7 +71,9 @@ rotateButton.onclick = function(){
         playerArray[playerTurn].div.style.transform = "scale(1)";
     }
     rotateDegree += -90;
+    centerRotateDegree += 90;
     table.style.transform = "rotate("+rotateDegree+"deg)";
+    centerGrid.style.transform = "rotate("+centerRotateDegree+"deg)";
 
     wait(750).then(()=>{
         playerTurn++;
