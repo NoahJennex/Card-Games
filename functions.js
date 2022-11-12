@@ -18,7 +18,7 @@ async function wait(ms){
 }
 
 //gets top card of a deck and moves it to another deck
-async function moveTopOfDeck(deckFrom, deckTo, showCardFrom, showCardTo, animationTime){
+async function moveTopOfDeck(deckFrom, deckTo, showCardFrom, showCardTo, animationTime, shrinkFrom, shrinkTo){
     [...document.getElementsByClassName("cardImg")].forEach(element => {element.style.transition = "all "+(animationTime/1000)+"s linear"});
 
     if(deckTo.div.firstChild){var toCoords = getCoords(deckTo.div.lastChild);}//checks if div has children, sets toCoords to location of the last child
@@ -33,14 +33,17 @@ async function moveTopOfDeck(deckFrom, deckTo, showCardFrom, showCardTo, animati
         //need to add timer so element moves before before getting sent to new div
         deckTo.div.appendChild(deckFrom.deckArraylist[deckFrom.deckArraylist.length-1].cardElement);
         deckTo.deckArraylist.push(deckFrom.deckArraylist.pop());
-        deckFrom.updateDeck(showCardFrom);
-        deckTo.updateDeck(showCardTo);
+        deckFrom.updateDeck(showCardFrom, shrinkFrom);
+        deckTo.updateDeck(showCardTo, shrinkTo);
     });
 }
 
 //takes selected cards of a deck and moves them to another deck
-async function moveSelectedCards(deckFrom, deckTo, showCardFrom, showCardTo, animationTime){
-    [...document.getElementsByClassName("cardImg")].forEach(element => {element.style.transition = "all "+(animationTime/1000)+"s linear"});
+async function moveSelectedCards(deckFrom, deckTo, showCardFrom, showCardTo, animationTime, shrinkFrom, shrinkTo){
+    [...document.getElementsByClassName("cardImg")].forEach(element => {
+        element.style.transition = "all "+(animationTime/1000)+"s linear";
+        element.style.transform = null;
+    });
 
     deckFrom.selectedArray.forEach(async element=> {
         if(deckTo.div.firstChild){var toCoords = getCoords(deckTo.div.lastChild);}//checks if div has children, sets toCoords to location of the last child
@@ -56,11 +59,15 @@ async function moveSelectedCards(deckFrom, deckTo, showCardFrom, showCardTo, ani
             deckTo.deckArraylist.push(element);
             //removes item at the index of that element (finds element and removes from the arraylist)
             deckFrom.deckArraylist.splice(deckFrom.deckArraylist.indexOf(element), 1); 
-            deckTo.updateDeck(showCardTo);
-            deckFrom.updateDeck(showCardFrom);
+            deckTo.updateDeck(showCardTo, shrinkFrom);
+            deckFrom.updateDeck(showCardFrom, shrinkTo);
         });   
         deckFrom.selectedArray = [];//resets/empties the selectedArray
     });
+}
+
+async function dealDeck(deckFrom, deckTo, showCardFrom, showCardTo, animationTime, shrink){
+
 }
 
 //adds onclick eventlistener to all cards in a deck/hand
@@ -75,6 +82,7 @@ function onCardClick(hand){
                 card.cardElement.classList.add("cardHoverTrue");
                 card.cardElement.style.top = null;
                 card.cardElement.style.border = "solid 1px transparent";
+                card.cardElement.style.transform = null;
             }
             //adds card to the selectedArray removes the hover class
             else{
@@ -83,6 +91,7 @@ function onCardClick(hand){
                 card.cardElement.classList.remove("cardHoverTrue");
                 card.cardElement.style.top = "-10px";
                 card.cardElement.style.border = "solid 1px limegreen";
+                card.cardElement.style.transform = "scale(1.05)";
             }
         }
     });

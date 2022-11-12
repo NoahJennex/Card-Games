@@ -33,7 +33,7 @@ class Card{
     //returns a card element (img) for the card
     createCardElement(){
         let newCardElement = document.createElement("img");
-        newCardElement.id = this.pictureFront;
+        // newCardElement.id = this.pictureFront;
         newCardElement.className="cardImg";
         newCardElement.draggable=false;
         newCardElement.src=this.pictureFront;
@@ -78,11 +78,11 @@ class Deck{
     }
     //fills a deck with a set amount of cards from another deck
     //takes cards from the end of the arraylist
-    async fillDeck(sizeIn, deckIn, animationTime){
+    async fillDeck(sizeIn, deckIn, animationTime, shrinkFrom, shrinkTo){
         [...document.getElementsByClassName("cardImg")].forEach(element => {element.style.transition = "all "+(animationTime/1000)+"s linear"});
  
         for(var i=0;i<sizeIn;i++){
-            await moveTopOfDeck(deckIn, this, false, false, animationTime);
+            await moveTopOfDeck(deckIn, this, false, false, animationTime, shrinkFrom, shrinkTo);
         }
     }
     //sets all the card elements into the deck div
@@ -145,9 +145,13 @@ class Hand extends Deck{
         this.updateDeck(showCard);
     }
     //Overrides
-    updateDeck(showCard){
+    updateDeck(showCard, shrink){
+        let cardGap = 50;
+        if(shrink == true){cardGap = 25;}
+
         let count = 0;//count is used for the offset of the card elements in the hand
-        this.div.style.width = 50*this.deckArraylist.length + "px";
+        this.div.style.width = (cardGap*this.deckArraylist.length)+(100-cardGap) + "px";
+        // this.div.style.paddingRight = (cardGap) + "px";
         this.deckArraylist.forEach(element =>{
             //updates if hand is face up or face down
             if(showCard == true){element.cardElement.src = element.pictureFront;}
@@ -155,8 +159,9 @@ class Hand extends Deck{
 
             element.cardElement.style.top = null;//resets the card offset
             element.cardElement.style.left = null;//resets the card offset
-            element.cardElement.style.left = count*(50) + "px";//offsets the card 50 pixels to the left
+            element.cardElement.style.left = count*(cardGap) + "px";//offsets the card 50 pixels to the left
             element.cardElement.className = "cardImg cardHand cardHoverTrue";
+            element.cardElement.style.transform = null;
 
             onCardClick(this);//adds onclick event listener to each card in the hand
             count++;

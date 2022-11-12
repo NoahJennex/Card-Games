@@ -1,16 +1,21 @@
-.grid-container {
+body {
+  background-color: #212124;
+}
+
+.grid-container-board {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: auto auto auto;
       grid-template-columns: auto auto auto;
   padding: 10px;
+  position: relative;
+  /* If you want text inside of it */
   width: 70%;
   max-width: 1100px;
   margin: auto;
 }
 
-.grid-item {
-  background-color: rgba(255, 255, 255, 0.8);
+.grid-item-board {
   border: 1px solid rgba(0, 0, 0, 0.8);
   font-size: 30px;
   text-align: center;
@@ -46,21 +51,11 @@
 #center {
   height: 145px;
   width: 230px;
-  background-color: black;
   position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  line-height: 100%;
-  height: 100%;
-  text-align: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 
 #deck1:hover, #pile1:hover {
@@ -69,7 +64,6 @@
 }
 
 #handDiv1 {
-  margin-left: -25px;
   z-index: 5;
   position: absolute;
   top: 50%;
@@ -79,7 +73,6 @@
 }
 
 #handDiv2 {
-  margin-left: -25px;
   z-index: 5;
   position: absolute;
   top: 50%;
@@ -89,7 +82,6 @@
 }
 
 #handDiv3 {
-  margin-left: -25px;
   z-index: 5;
   position: absolute;
   top: 50%;
@@ -99,7 +91,6 @@
 }
 
 #handDiv4 {
-  margin-left: -25px;
   z-index: 5;
   position: absolute;
   top: 50%;
@@ -110,5 +101,31 @@
 
 .cardImg {
   width: 100px;
+}
+
+.cardImg {
+  -webkit-transition: all 0.75s linear;
+  transition: all 0.75s linear;
+}
+
+#tableInner {
+  -webkit-transition: all 0.75s linear;
+  transition: all 0.75s linear;
+}
+
+#tableOuter {
+  overflow: hidden;
+}
+
+#deck1:hover, #pile1:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.grid-container-center {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto auto;
+      grid-template-columns: auto auto;
 }
 /*# sourceMappingURL=skeletonStyle.css.map */

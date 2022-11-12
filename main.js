@@ -54,7 +54,7 @@ pile1.div.onclick = function(){
 }
 moveHandBtn.onclick = function(){
     console.log(hand1.selectedArray);
-    moveSelectedCards(hand1, deck1, true, false, defaultAnimationTime);
+    moveSelectedCards(hand1, deck1, true, false, defaultAnimationTime, false, false);
 }
 console.log("done");
 
