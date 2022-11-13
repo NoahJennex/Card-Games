@@ -1,64 +1,14 @@
-// body{
-//     transition: all 0.3s linear;
-// }
-
 .deck{
     // border: 1px solid black;
     position: relative;
     width: 100px;
-    // width: fit-content;
     height: 145px;
-    // transform: rotate(-90deg);
-}
-// .hand{
-//     overflow-x: auto;
-//     overflow-y: visible;
-//     height: 110px;
-// }
-#deck:hover, #pile:hover{
-    transform: scale(1.01);
-}
-
-#pile{
-    // border: 1px solid red;
-    position: relative;
-    width: 100px;
-    height: 145px;
-}
-#pile:hover{
-    transform: scale(1.01);
-}
-
-#hand1, #hand2, #hand3, #hand4{
-    border: 1px solid black;
-    // width: 100%;
-}
-
-#tableCenter{
-    position: relative;
-    // top: 50px;
-    // left: 400px;
-    border: 1px solid green;
-
-    width: 230px;
-    // width: fit-content;
-    height: 145px;
-    display: grid;
-
-    background-color: black;
-
-}
-
-#moveHandBtn{
-    margin: 5px;
-}
-#moveHandBtn:hover{
-    transform: scale(1.05);
 }
 
 .cardImg{
     width: 100px;
     // transition: all 0.3s linear;
+    transition: all 0.75s linear;
 }
 .cardHand{
     position: absolute;
@@ -89,20 +39,4 @@
    -khtml-user-select: none; /* Konqueror HTML */
    -moz-user-select: none; /* Firefox */
    -ms-user-select: none; /* Internet Explorer/Edge */
-}
-
-.grid-container{
-    display: grid;
-    grid-template-columns: auto auto;
-}
-
-.grid-item1{
-    grid-column-start: 1;
-    grid-column-end: 1;
-    margin: auto;
-}
-.grid-item2{
-    grid-column-start: 2;
-    grid-column-end: 2;
-    margin: auto;
 }

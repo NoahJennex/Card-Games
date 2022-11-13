@@ -2,35 +2,6 @@ body {
   background-color: #212124;
 }
 
-.grid-container-board {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: auto auto auto;
-      grid-template-columns: auto auto auto;
-  -webkit-column-gap: 0;
-          column-gap: 0;
-  row-gap: 0;
-  position: relative;
-  /* If you want text inside of it */
-  width: 70%;
-  max-width: 900px;
-  max-height: 900px;
-  margin: auto;
-}
-
-.grid-item-board {
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  font-size: 30px;
-  text-align: center;
-  max-height: 300px;
-  height: 0;
-  max-width: 300px;
-  display: block;
-  width: 100%;
-  padding-top: 100%;
-  position: relative;
-}
-
 #grid-item-2 {
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
@@ -68,34 +39,7 @@ body {
           transform: scale(1.01);
 }
 
-#handDiv1 {
-  z-index: 5;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-}
-
-#handDiv2 {
-  z-index: 5;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-}
-
-#handDiv3 {
-  z-index: 5;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-}
-
-#handDiv4 {
+.handDiv {
   z-index: 5;
   position: absolute;
   top: 50%;
@@ -105,15 +49,6 @@ body {
 }
 
 #grid-item-center {
-  -webkit-transition: all 0.75s linear;
-  transition: all 0.75s linear;
-}
-
-.cardImg {
-  width: 100px;
-}
-
-.cardImg {
   -webkit-transition: all 0.75s linear;
   transition: all 0.75s linear;
 }
@@ -137,5 +72,31 @@ body {
   display: grid;
   -ms-grid-columns: auto auto;
       grid-template-columns: auto auto;
+}
+
+.grid-container-board {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto auto auto;
+      grid-template-columns: auto auto auto;
+  -webkit-column-gap: 0;
+          column-gap: 0;
+  row-gap: 0;
+  position: relative;
+  width: 70%;
+  max-width: 900px;
+  max-height: 900px;
+  margin: auto;
+}
+
+.grid-item-board {
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  max-height: 300px;
+  height: 0;
+  max-width: 300px;
+  display: block;
+  width: 100%;
+  padding-top: 100%;
+  position: relative;
 }
 /*# sourceMappingURL=skeletonStyle.css.map */

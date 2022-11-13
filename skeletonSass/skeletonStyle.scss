@@ -2,68 +2,31 @@ body{
   background-color: rgb(33, 33, 36);
 }
 
-.grid-container-board {
-  // border: 1px solid rgba(0, 0, 0, 0.8);
-
-  display: grid;
-  grid-template-columns: auto auto auto;
-  // grid-template-rows: auto auto auto;
-  column-gap: 0;
-  row-gap: 0;
-  // background-color: #2196F3;
-  // padding: 10px;
-  position: relative; /* If you want text inside of it */
-  width: 70%;
-  max-width: 900px;
-  max-height: 900px;
-  margin: auto;
-    
-}
-.grid-item-board {
-  // background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  // padding: 20px;
-  font-size: 30px;
-  text-align: center;
-
-  max-height: 300px;
-  height: 0;
-  max-width: 300px;
-
-  display: block;
-  width: 100%;
-  padding-top: 100%;
-  // padding: max(150px);
-  position: relative;
-}
-
+//*hand 3
 #grid-item-2{
   transform: rotate(180deg);
   z-index: 5;
 }
+//*hand 2
 #grid-item-4{
   transform: rotate(90deg);
   z-index: 5;
 }
+//*hand 4
 #grid-item-6{
   transform: rotate(-90deg);
   z-index: 5;
 }
+//*hand 1
 #grid-item-8{
-  // transform: rotate(90deg);
   z-index: 5;
 }
 
 #center{
-  // position: relative;
+   // background-color: black;
+
   height: 145px;
   width: 230px;
-
-  // margin: auto;
-  // display: grid;
-
-  // background-color: black;
-
   position: absolute;
   top: 50%;
   left: 50%;
@@ -74,28 +37,7 @@ body{
   transform: scale(1.01);
 }
 
-#handDiv1{
-  // margin-left: -25px;
-  z-index: 5;
-
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-}
-#handDiv2{
-  // margin-left: -25px;
-  z-index: 5;
-
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-}
-#handDiv3{
-  // margin-left: -25px;
+.handDiv{
   z-index: 5;
 
   position: absolute;
@@ -103,26 +45,8 @@ body{
   left: 50%;
   transform: translate(-50%, -50%);
 }
-#handDiv4{
-  // margin-left: -25px;
-  z-index: 5;
 
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
 #grid-item-center{
-  transition: all 0.75s linear;
-}
-
-.cardImg{
-  width: 100px;
-}
-// .deckHand{
-//   transition: all 0.75s linear;
-// }
-.cardImg{
   transition: all 0.75s linear;
 }
 
@@ -132,25 +56,7 @@ body{
 #tableOuter{
   overflow: hidden;
 }
-// #pile1{
-//   position: relative;
-//   width: 100px;
-//   height: 145px;
-//   margin: 0;
 
-//   z-index: 5;
-// }
-// #deck1{
-//   position:relative;
-//   width: 100px;
-//   height: 145px;
-
-//   top:0px;
-//   left: 120px;
-//   margin: 0;
-
-//   z-index: 5;
-// }
 
 #deck1:hover, #pile1:hover {
   transform: scale(1.1);
@@ -161,13 +67,31 @@ body{
   grid-template-columns: auto auto;
 }
 
-// .grid-item1-center{
-//   grid-column-start: 1;
-//   grid-column-end: 1;
-//   margin: auto;
-// }
-// .grid-item2-center{
-//   grid-column-start: 2;
-//   grid-column-end: 2;
-//   margin: auto;
-// }
+.grid-container-board {
+  // border: 1px solid rgba(0, 0, 0, 0.8);
+  // background-color: #2196F3;
+
+  display: grid;
+  grid-template-columns: auto auto auto;
+  column-gap: 0;
+  row-gap: 0;
+  position: relative;
+  width: 70%;
+  max-width: 900px;
+  max-height: 900px;
+  margin: auto;
+    
+}
+.grid-item-board {
+  // background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+
+  max-height: 300px;
+  height: 0;
+  max-width: 300px;
+  display: block;
+  width: 100%;
+  padding-top: 100%;
+  position: relative;
+}
+

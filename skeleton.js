@@ -1,7 +1,7 @@
 import {Card, Deck, Pile, Hand} from '/classes.js';
 import {getCoords, wait, moveTopOfDeck, moveSelectedCards, onCardClick} from '/functions.js';
 
-var defaultHandSize = 8;
+var defaultHandSize = 13;
 var playerArray = [];
 
 var deck1 = new Deck("deck1");

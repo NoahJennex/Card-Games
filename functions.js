@@ -19,23 +19,26 @@ async function wait(ms){
 
 //gets top card of a deck and moves it to another deck
 async function moveTopOfDeck(deckFrom, deckTo, showCardFrom, showCardTo, animationTime, shrinkFrom, shrinkTo){
-    [...document.getElementsByClassName("cardImg")].forEach(element => {element.style.transition = "all "+(animationTime/1000)+"s linear"});
+    if(deckFrom.deckArraylist.length != 0){
+        [...document.getElementsByClassName("cardImg")].forEach(element => {element.style.transition = "all "+(animationTime/1000)+"s linear"});
 
-    if(deckTo.div.firstChild){var toCoords = getCoords(deckTo.div.lastChild);}//checks if div has children, sets toCoords to location of the last child
-    else{var toCoords = getCoords(deckTo.div);}//sets toCoords to the deck div
-    let fromCoords = getCoords(deckFrom.div);
-    let topCard = deckFrom.deckArraylist[deckFrom.deckArraylist.length-1];
+        if(deckTo.div.firstChild){var toCoords = getCoords(deckTo.div.lastChild);}//checks if div has children, sets toCoords to location of the last child
+        else{var toCoords = getCoords(deckTo.div);}//sets toCoords to the deck div
+        let fromCoords = getCoords(deckFrom.div);
+        let topCard = deckFrom.deckArraylist[deckFrom.deckArraylist.length-1];
 
-    topCard.cardElement.style.left = (toCoords.left - fromCoords.left) + "px";
-    topCard.cardElement.style.top = (toCoords.top - fromCoords.top) + "px";
+        topCard.cardElement.style.left = (toCoords.left - fromCoords.left) + "px";
+        topCard.cardElement.style.top = (toCoords.top - fromCoords.top) + "px";
 
-    await wait(animationTime).then(() =>{
-        //need to add timer so element moves before before getting sent to new div
-        deckTo.div.appendChild(deckFrom.deckArraylist[deckFrom.deckArraylist.length-1].cardElement);
-        deckTo.deckArraylist.push(deckFrom.deckArraylist.pop());
-        deckFrom.updateDeck(showCardFrom, shrinkFrom);
-        deckTo.updateDeck(showCardTo, shrinkTo);
-    });
+        await wait(animationTime).then(() =>{
+            //need to add timer so element moves before before getting sent to new div
+            deckTo.div.appendChild(deckFrom.deckArraylist[deckFrom.deckArraylist.length-1].cardElement);
+            deckTo.deckArraylist.push(deckFrom.deckArraylist.pop());
+            deckFrom.updateDeck(showCardFrom, shrinkFrom);
+            deckTo.updateDeck(showCardTo, shrinkTo);
+        });
+    }
+    else{console.log(deckFrom.deckName+" is empty");}
 }
 
 //takes selected cards of a deck and moves them to another deck
