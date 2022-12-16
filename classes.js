@@ -176,7 +176,8 @@ class Player{
         this.name = name;
         this.hand = hand;
         this.points = 0;
+        this.nameDiv = document.createElement("div"); 
     }
 }
 
-export{Card, Deck, Pile, Hand};
+export{Card, Deck, Pile, Hand, Player};

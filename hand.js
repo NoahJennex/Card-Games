@@ -1,3 +1,0 @@
-class hand{
-    constructor(){}
-}
